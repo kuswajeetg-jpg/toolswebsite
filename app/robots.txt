@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://smartdocumenttools.com/sitemap.xml
+
+# Google-specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Bing-specific  
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
