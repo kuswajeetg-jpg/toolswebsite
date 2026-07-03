@@ -15,6 +15,21 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
+# Set up Swap Memory to handle Next.js builds on low memory (1GB) VPS instances
+echo ""
+echo "--> Setting up Swap Memory (for low RAM instances)..."
+if [ ! -f /swapfile ]; then
+  (fallocate -l 2G /swapfile || dd if=/dev/zero of=/swapfile bs=1M count=2048) && \
+  chmod 600 /swapfile && \
+  mkswap /swapfile && \
+  (swapon /swapfile || true) && \
+  (echo '/swapfile none swap sw 0 0' >> /etc/fstab || true)
+  echo "Swap setup completed (or skipped if not permitted by container host)."
+else
+  echo "Swap file already exists."
+fi
+
+
 # Ask for domain
 read -p "Enter your domain name (e.g., example.com): " DOMAIN
 if [ -z "$DOMAIN" ]; then
