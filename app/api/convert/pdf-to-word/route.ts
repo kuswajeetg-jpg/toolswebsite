@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
     const scriptPath = path.join(process.cwd(), 'lib', 'python', 'convert_pdf.py');
 
     // Run conversion
-    const { stdout, stderr } = await execAsync(`python "${scriptPath}" "${inputPdfPath}" "${outputDocxPath}"`);
+    const { stdout, stderr } = await execAsync(`python3 "${scriptPath}" "${inputPdfPath}" "${outputDocxPath}"`);
 
     if (!fs.existsSync(outputDocxPath)) {
        console.error("Conversion failed:", stderr);

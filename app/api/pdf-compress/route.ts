@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
 
     let stdout, stderr;
     try {
-        const result = await execAsync(`python "${scriptPath}" "${inputPdfPath}" "${outputPdfPath}" "${level}"`);
+        const result = await execAsync(`python3 "${scriptPath}" "${inputPdfPath}" "${outputPdfPath}" "${level}"`);
         stdout = result.stdout;
         stderr = result.stderr;
     } catch (e: any) {

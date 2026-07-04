@@ -1,0 +1,179 @@
+=== COMMAND: pm2 status ===
+STDOUT:
+┌────┬─────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name            │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼─────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 0  │ toolswebsite    │ default     │ N/A     │ fork    │ 2536     │ 9m     │ 82   │ online    │ 0%       │ 54.8mb   │ root     │ disabled │
+└────┴─────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+host metrics | cpu: 9.5% | ram usage: 13.9% | disk: ⇓ 0.012mb/s ⇑ 1.142mb/s |
+
+=== COMMAND: pm2 info toolswebsite ===
+STDOUT:
+Describing process with id 0 - name toolswebsite 
+┌───────────────────┬────────────────────────────────────────┐
+│ status            │ online                                 │
+│ name              │ toolswebsite                           │
+│ namespace         │ default                                │
+│ version           │ N/A                                    │
+│ restarts          │ 82                                     │
+│ uptime            │ 9m                                     │
+│ script path       │ /usr/bin/npm                           │
+│ script args       │ start                                  │
+│ error log path    │ /root/.pm2/logs/toolswebsite-error.log │
+│ out log path      │ /root/.pm2/logs/toolswebsite-out.log   │
+│ pid path          │ /root/.pm2/pids/toolswebsite-0.pid     │
+│ interpreter       │ /usr/bin/node                          │
+│ interpreter args  │ N/A                                    │
+│ script id         │ 0                                      │
+│ exec cwd          │ /var/www/toolswebsite                  │
+│ exec mode         │ fork_mode                              │
+│ node.js version   │ 20.20.2                                │
+│ node env          │ N/A                                    │
+│ watch & reload    │ ✘                                      │
+│ unstable restarts │ 0                                      │
+│ created at        │ 2026-07-04T06:21:51.173Z               │
+└───────────────────┴────────────────────────────────────────┘
+ Actions available 
+┌────────────────────────┐
+│ km:heapdump            │
+│ km:cpu:profiling:start │
+│ km:cpu:profiling:stop  │
+│ km:heap:sampling:start │
+│ km:heap:sampling:stop  │
+└────────────────────────┘
+ Trigger via: pm2 trigger toolswebsite <action_name>
+
+ Code metrics value 
+┌────────────────────────┬──────────┐
+│ Heap Size              │ 8.35 MiB │
+│ Heap Usage             │ 87.66 %  │
+│ Used Heap Size         │ 7.32 MiB │
+│ Active requests        │ 0        │
+│ Active handles         │ 5        │
+│ Event Loop Latency     │ 0.33 ms  │
+│ Event Loop Latency p95 │ 1.07 ms  │
+└────────────────────────┴──────────┘
+ Divergent env variables from local env 
+┌────────────────┬──────────────────────────────────────┐
+│ PWD            │ /var/www/toolswebsite                │
+│ SSH_CONNECTION │ 103.171.168.107 53608 10.10.10.42 22 │
+│ SHLVL          │ 2                                    │
+│ XDG_SESSION_ID │ 18687                                │
+│ SSH_CLIENT     │ 103.171.168.107 53608 22             │
+└────────────────┴──────────────────────────────────────┘
+
+ Add your own code metrics: http://bit.ly/code-metrics
+ Use `pm2 logs toolswebsite [--lines 1000]` to display logs
+ Use `pm2 env 0` to display environment variables
+ Use `pm2 monit` to monitor CPU and Memory usage toolswebsite
+
+=== COMMAND: tail -n 50 /root/.pm2/logs/toolswebsite-error.log /root/.pm2/logs/toolswebsite-out.log 2>/dev/null ===
+STDOUT:
+==> /root/.pm2/logs/toolswebsite-error.log <==
+    at async Server.<anonymous> (/var/www/toolswebsite/node_modules/next/dist/server/lib/start-server.js:249:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/toolswebsite/.next/prerender-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/var/www/toolswebsite/.next/prerender-manifest.json'
+    at async open (node:internal/fs/promises:637:25)
+    at async Object.readFile (node:internal/fs/promises:1249:14)
+    at async setupFsCheck (/var/www/toolswebsite/node_modules/next/dist/server/lib/router-utils/filesystem.js:188:40)
+    at async initialize (/var/www/toolswebsite/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async Server.<anonymous> (/var/www/toolswebsite/node_modules/next/dist/server/lib/start-server.js:249:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/toolswebsite/.next/prerender-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/var/www/toolswebsite/.next/prerender-manifest.json'
+    at async open (node:internal/fs/promises:637:25)
+    at async Object.readFile (node:internal/fs/promises:1249:14)
+    at async setupFsCheck (/var/www/toolswebsite/node_modules/next/dist/server/lib/router-utils/filesystem.js:188:40)
+    at async initialize (/var/www/toolswebsite/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async Server.<anonymous> (/var/www/toolswebsite/node_modules/next/dist/server/lib/start-server.js:249:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/toolswebsite/.next/prerender-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/var/www/toolswebsite/.next/prerender-manifest.json'
+    at async open (node:internal/fs/promises:637:25)
+    at async Object.readFile (node:internal/fs/promises:1249:14)
+    at async setupFsCheck (/var/www/toolswebsite/node_modules/next/dist/server/lib/router-utils/filesystem.js:188:40)
+    at async initialize (/var/www/toolswebsite/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async Server.<anonymous> (/var/www/toolswebsite/node_modules/next/dist/server/lib/start-server.js:249:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/toolswebsite/.next/prerender-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/var/www/toolswebsite/.next/prerender-manifest.json'
+    at async open (node:internal/fs/promises:637:25)
+    at async Object.readFile (node:internal/fs/promises:1249:14)
+    at async setupFsCheck (/var/www/toolswebsite/node_modules/next/dist/server/lib/router-utils/filesystem.js:188:40)
+    at async initialize (/var/www/toolswebsite/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async Server.<anonymous> (/var/www/toolswebsite/node_modules/next/dist/server/lib/start-server.js:249:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/toolswebsite/.next/prerender-manifest.json'
+}
+
+==> /root/.pm2/logs/toolswebsite-out.log <==
+
+> smart-document-tools@1.0.0 start
+> next start
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+
+> smart-document-tools@1.0.0 start
+> next start
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+
+> smart-document-tools@1.0.0 start
+> next start
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+
+> smart-document-tools@1.0.0 start
+> next start
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+
+> smart-document-tools@1.0.0 start
+> next start
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+ ✓ Ready in 2.1s
+
+> smart-document-tools@1.0.0 start
+> next start
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+ ✓ Ready in 1163ms
+
+=== COMMAND: ss -tulpn | grep 3000 ===
+STDOUT:
+tcp   LISTEN 0      511                *:3000            *:*    users:(("next-server (v1",pid=2548,fd=18))
+
