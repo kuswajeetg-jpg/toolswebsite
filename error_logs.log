@@ -1,0 +1,30 @@
+    at async NextNodeServer.renderPageComponent (/var/www/toolswebsite/node_modules/next/dist/server/base-server.js:1924:24)
+    at async NextNodeServer.renderToResponseImpl (/var/www/toolswebsite/node_modules/next/dist/server/base-server.js:1962:32)
+Compression failed: Command failed: python3 "/var/www/toolswebsite/lib/python/pdf_compress.py" "/tmp/input_compress_1783148639197.pdf" "/tmp/output_compress_1783148639197.pdf" "medium"
+ ERROR: 'PdfWriter' object has no attribute 'compress_identical_objects'
+
+API Error: Error: Compression failed
+    at g (/var/www/toolswebsite/.next/server/app/api/pdf-compress/route.js:1:1410)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /var/www/toolswebsite/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+    at async e_.execute (/var/www/toolswebsite/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+    at async e_.handle (/var/www/toolswebsite/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+    at async doRender (/var/www/toolswebsite/node_modules/next/dist/server/base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (/var/www/toolswebsite/node_modules/next/dist/server/base-server.js:1588:28)
+    at async NextNodeServer.renderToResponseWithComponentsImpl (/var/www/toolswebsite/node_modules/next/dist/server/base-server.js:1496:28)
+    at async NextNodeServer.renderPageComponent (/var/www/toolswebsite/node_modules/next/dist/server/base-server.js:1924:24)
+    at async NextNodeServer.renderToResponseImpl (/var/www/toolswebsite/node_modules/next/dist/server/base-server.js:1962:32)
+Compression failed: Command failed: python3 "/var/www/toolswebsite/lib/python/pdf_compress.py" "/tmp/input_compress_1783148653391.pdf" "/tmp/output_compress_1783148653391.pdf" "high"
+ ERROR: 'PdfWriter' object has no attribute 'compress_identical_objects'
+
+API Error: Error: Compression failed
+    at g (/var/www/toolswebsite/.next/server/app/api/pdf-compress/route.js:1:1410)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /var/www/toolswebsite/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+    at async e_.execute (/var/www/toolswebsite/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+    at async e_.handle (/var/www/toolswebsite/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+    at async doRender (/var/www/toolswebsite/node_modules/next/dist/server/base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (/var/www/toolswebsite/node_modules/next/dist/server/base-server.js:1588:28)
+    at async NextNodeServer.renderToResponseWithComponentsImpl (/var/www/toolswebsite/node_modules/next/dist/server/base-server.js:1496:28)
+    at async NextNodeServer.renderPageComponent (/var/www/toolswebsite/node_modules/next/dist/server/base-server.js:1924:24)
+    at async NextNodeServer.renderToResponseImpl (/var/www/toolswebsite/node_modules/next/dist/server/base-server.js:1962:32)

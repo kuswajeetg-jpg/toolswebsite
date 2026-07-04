@@ -14,44 +14,59 @@ def compress_pdf(input_pdf, output_pdf, compression_level):
             writer.add_page(page)
 
         # Apply structural optimizations (always do this)
-        writer.compress_identical_objects(remove_duplicates=True, remove_unreferenced=True)
+        # Note: pypdf 6.x uses remove_identicals and remove_orphans parameters
+        try:
+            writer.compress_identical_objects(remove_identicals=True, remove_orphans=True)
+        except TypeError:
+            # Fallback for other pypdf versions
+            try:
+                writer.compress_identical_objects(remove_duplicates=True, remove_unreferenced=True)
+            except Exception:
+                pass
 
-        # Apply content stream compression for medium and high levels
-        if compression_level in ["medium", "high"]:
-            for page in writer.pages:
+        # Compress content streams
+        for page in writer.pages:
+            try:
                 page.compress_content_streams()
+            except Exception:
+                pass
 
-        # Extreme compression (High compression / Low quality setting)
-        if compression_level == "high":
-            for page in writer.pages:
-                # Use list of keys to avoid modification issues during iteration
-                img_keys = list(page.images.keys())
-                for img_key in img_keys:
-                    try:
-                        img = page.images[img_key]
-                        pil_img = Image.open(io.BytesIO(img.data))
-                        
-                        # Downscale dimensions (e.g. max 600px width/height)
-                        max_dim = 600
-                        if pil_img.width > max_dim or pil_img.height > max_dim:
-                            pil_img.thumbnail((max_dim, max_dim), Image.Resampling.LANCZOS)
-                        
-                        # Convert to RGB mode if needed (JPEG doesn't support RGBA)
-                        if pil_img.mode in ("RGBA", "P"):
-                            # Create white background for transparent images
-                            background = Image.new("RGB", pil_img.size, (255, 255, 255))
-                            background.paste(pil_img, mask=pil_img.split()[3] if pil_img.mode == "RGBA" else None)
-                            pil_img = background
-                        
-                        # Save with very low quality (extreme compression)
-                        out_bytes = io.BytesIO()
-                        pil_img.save(out_bytes, format="JPEG", quality=20)
-                        
-                        # Replace the image in pypdf
-                        img.replace(pil_img, quality=20)
-                    except Exception as e:
-                        # Continue if an individual image fails to process
-                        pass
+        # Define quality and max dimension settings for image compression on each level
+        # Low: High Quality (slight compression)
+        # Medium: Medium Quality (perfect balance)
+        # High: Extreme Compression (smallest size)
+        settings = {
+            "low": {"max_dim": 1600, "quality": 75},
+            "medium": {"max_dim": 1000, "quality": 50},
+            "high": {"max_dim": 600, "quality": 20}
+        }
+        
+        cfg = settings.get(compression_level, settings["medium"])
+
+        # Perform image downsampling and compression
+        for page in writer.pages:
+            img_keys = list(page.images.keys())
+            for img_key in img_keys:
+                try:
+                    img = page.images[img_key]
+                    pil_img = Image.open(io.BytesIO(img.data))
+                    
+                    # Check if resize is needed
+                    max_dim = cfg["max_dim"]
+                    if pil_img.width > max_dim or pil_img.height > max_dim:
+                        pil_img.thumbnail((max_dim, max_dim), Image.Resampling.LANCZOS)
+                    
+                    # Convert to RGB mode if needed (JPEG does not support transparency/RGBA)
+                    if pil_img.mode in ("RGBA", "P"):
+                        background = Image.new("RGB", pil_img.size, (255, 255, 255))
+                        background.paste(pil_img, mask=pil_img.split()[3] if pil_img.mode == "RGBA" else None)
+                        pil_img = background
+                    
+                    # Compress and replace
+                    img.replace(pil_img, quality=cfg["quality"])
+                except Exception as e:
+                    # Proceed if an individual image fails to compress
+                    pass
 
         with open(output_pdf, "wb") as f:
             writer.write(f)
