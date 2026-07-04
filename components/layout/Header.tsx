@@ -108,6 +108,7 @@ export default function Header() {
         </div>
 
         <nav className="hidden md:flex gap-6 items-center">
+          <Link href="/" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">{t("home") || "Home"}</Link>
           {/* All Tools with Mega Menu Hover */}
           <div 
             className="relative h-16 flex items-center"
@@ -228,6 +229,7 @@ export default function Header() {
 
       {mobileOpen && (
         <div className="md:hidden bg-white border-b border-gray-100 px-4 py-4 space-y-3">
+          <Link href="/" className="block text-gray-600 hover:text-blue-600 font-medium py-2" onClick={() => setMobileOpen(false)}>{t("home") || "Home"}</Link>
           <Link href="/tools" className="block text-gray-600 hover:text-blue-600 font-medium py-2" onClick={() => setMobileOpen(false)}>{t("all_tools")}</Link>
           <Link href="/admin" className="block text-gray-600 hover:text-blue-600 font-medium py-2" onClick={() => setMobileOpen(false)}>{t("admin")}</Link>
           <Link href="/about" className="block text-gray-600 hover:text-blue-600 font-medium py-2" onClick={() => setMobileOpen(false)}>{t("about")}</Link>

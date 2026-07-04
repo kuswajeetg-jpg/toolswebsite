@@ -54,6 +54,7 @@ export const toolsRegistry: ToolConfig[] = [
   { id: "pdf-password", name: "PDF Password", path: "/tools/pdf-password", icon: Lock, desc: "Add or remove password protection", category: "PDF Tools", enabled: true, featured: false },
   { id: "pdf-page-numbers", name: "PDF Page Numbers", path: "/tools/pdf-page-numbers", icon: FileText, desc: "Add page numbers to PDF documents", category: "PDF Tools", enabled: true, featured: false },
   { id: "pdf-rotate", name: "PDF Rotate", path: "/tools/pdf-rotate", icon: RefreshCw, desc: "Rotate PDF pages by 90, 180, or 270 degrees", category: "PDF Tools", enabled: true, featured: false },
+  { id: "pdf-compressor", name: "PDF Compressor", path: "/tools/pdf-compressor", icon: ArrowDownToLine, desc: "Compress PDF file size online", category: "PDF Tools", enabled: true, featured: true },
   
   // Image Tools - Existing
   { id: "image-compressor", name: "Image Compressor", path: "/tools/image-compressor", icon: Zap, desc: "Reduce image file size", category: "Image Tools", enabled: true, featured: true },

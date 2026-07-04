@@ -1,0 +1,74 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { exec } from 'child_process';
+import { promisify } from 'util';
+import path from 'path';
+import fs from 'fs';
+import os from 'os';
+
+const execAsync = promisify(exec);
+
+export async function POST(req: NextRequest) {
+  try {
+    const formData = await req.formData();
+    const file = formData.get('file') as File | null;
+    const level = (formData.get('level') as string | null) || 'medium';
+
+    if (!file) {
+      return NextResponse.json({ error: 'Missing required file' }, { status: 400 });
+    }
+
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+
+    // Create temp paths
+    const tmpDir = os.tmpdir();
+    const timestamp = Date.now();
+    const inputPdfPath = path.join(tmpDir, `input_compress_${timestamp}.pdf`);
+    const outputPdfPath = path.join(tmpDir, `output_compress_${timestamp}.pdf`);
+
+    // Write file to temp
+    fs.writeFileSync(inputPdfPath, buffer);
+
+    // Python script path
+    const scriptPath = path.join(process.cwd(), 'lib', 'python', 'pdf_compress.py');
+
+    let stdout, stderr;
+    try {
+        const result = await execAsync(`python "${scriptPath}" "${inputPdfPath}" "${outputPdfPath}" "${level}"`);
+        stdout = result.stdout;
+        stderr = result.stderr;
+    } catch (e: any) {
+        stdout = e.stdout || "";
+        stderr = e.stderr || e.message || "";
+    }
+
+    if (!fs.existsSync(outputPdfPath)) {
+       console.error("Compression failed:", stderr, stdout);
+       throw new Error("Compression failed");
+    }
+
+    // Read the processed file
+    const pdfBuffer = fs.readFileSync(outputPdfPath);
+
+    // Cleanup temp files
+    try {
+      fs.unlinkSync(inputPdfPath);
+      fs.unlinkSync(outputPdfPath);
+    } catch (e) {
+      console.warn("Failed to cleanup temp files:", e);
+    }
+
+    // Return the file
+    return new NextResponse(pdfBuffer, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': `attachment; filename="compressed_${file.name}"`,
+      },
+    });
+
+  } catch (error: any) {
+    console.error('API Error:', error);
+    return NextResponse.json({ error: 'Failed to compress PDF' }, { status: 500 });
+  }
+}
