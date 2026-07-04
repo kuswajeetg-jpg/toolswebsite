@@ -17,7 +17,7 @@ def compress_pdf(input_pdf, output_pdf, compression_level):
         # Note: pypdf 6.x uses remove_identicals and remove_orphans parameters
         try:
             writer.compress_identical_objects(remove_identicals=True, remove_orphans=True)
-        except TypeError:
+        except (TypeError, AttributeError):
             # Fallback for other pypdf versions
             try:
                 writer.compress_identical_objects(remove_duplicates=True, remove_unreferenced=True)
