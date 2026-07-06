@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://smartdocumenttools.com/sitemap.xml
+Sitemap: https://valuehostings.site/sitemap.xml
 
 # Google-specific
 User-agent: Googlebot
