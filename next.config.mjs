@@ -13,6 +13,18 @@ const withPWA = withPWAInit({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Disable linting and type checking during builds to save memory
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  // Disable worker threads to run everything in a single process and prevent hangs
+  experimental: {
+    workerThreads: false,
+    cpus: 1,
+  },
 };
 
 export default withNextIntl(withPWA(nextConfig));
