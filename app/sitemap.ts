@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { toolsRegistry } from '@/config/toolRegistry';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://smartdocumenttools.com';
+  const baseUrl = process.env.NEXTAUTH_URL || 'https://valuehostings.site';
   
   const toolUrls = toolsRegistry
     .filter(tool => tool.enabled)
