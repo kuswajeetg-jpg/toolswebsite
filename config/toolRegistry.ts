@@ -44,6 +44,7 @@ export const toolsRegistry: ToolConfig[] = [
   { id: "code-minifier", name: "Code Minifier", path: "/tools/code-minifier", icon: Scissors, desc: "Minify HTML, CSS, and JS code", category: "Developer Tools", enabled: true, featured: false },
   { id: "json-formatter", name: "JSON Formatter", path: "/tools/json-formatter", icon: Settings, desc: "Format and validate JSON data", category: "Developer Tools", enabled: true, featured: true },
   { id: "encoder-decoder", name: "Encoder & Decoder", path: "/tools/encoder-decoder", icon: RefreshCw, desc: "Base64 and URL encoding/decoding", category: "Developer Tools", enabled: true, featured: false },
+  { id: "robots-txt-generator", name: "Robots.txt & Robots Meta Tag Builder", path: "/tools/robots-txt-generator", icon: Settings, desc: "Generate robots.txt rules, build meta robots tags, and simulate search snippet appearances.", category: "Developer Tools", enabled: true, featured: true },
   // PDF Tools - Existing
   { id: "image-to-pdf", name: "Image to PDF", path: "/tools/image-to-pdf", icon: FileUp, desc: "Convert images to PDF locally", category: "PDF Tools", enabled: true, featured: false },
   { id: "pdf-merge", name: "PDF Merge", path: "/tools/pdf-merge", icon: Merge, desc: "Combine multiple PDF files", category: "PDF Tools", enabled: true, featured: false },

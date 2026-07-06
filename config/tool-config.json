@@ -39,7 +39,8 @@
     { "id": "agreement-generator", "name": "Agreement Generator", "path": "/tools/agreement-generator", "icon": "FileText", "desc": "Generate legal contracts and agreements", "category": "Document Generators", "enabled": true, "featured": false },
     { "id": "certificate-generator", "name": "Certificate Generator", "path": "/tools/certificate-generator", "icon": "FileText", "desc": "Create professional certificates", "category": "Document Generators", "enabled": true, "featured": false },
     { "id": "id-card-maker", "name": "ID Card Maker", "path": "/tools/id-card-maker", "icon": "CreditCard", "desc": "Design professional ID cards", "category": "Document Generators", "enabled": true, "featured": false },
-    { "id": "business-card-designer", "name": "Business Card Designer", "path": "/tools/business-card-designer", "icon": "CreditCard", "desc": "Create professional business cards", "category": "Document Generators", "enabled": true, "featured": false }
+    { "id": "business-card-designer", "name": "Business Card Designer", "path": "/tools/business-card-designer", "icon": "CreditCard", "desc": "Create professional business cards", "category": "Document Generators", "enabled": true, "featured": false },
+    { "id": "robots-txt-generator", "name": "Robots.txt & Robots Meta Tag Builder", "path": "/tools/robots-txt-generator", "icon": "Settings", "desc": "Generate robots.txt rules, build meta robots tags, and simulate search snippet appearances.", "category": "Developer Tools", "enabled": true, "featured": true }
   ],
   "_comment": "Add new tools by copying a block above. Change 'enabled' to false to hide a tool, or true to show it. Categories: PDF Tools, Image Tools, Calculators, Document Generators, AI Tools, Developer Tools"
 }
