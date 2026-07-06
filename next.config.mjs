@@ -5,7 +5,7 @@ const withNextIntl = createNextIntlPlugin();
 
 const withPWA = withPWAInit({
   dest: "public",
-  disable: process.env.NODE_ENV === "development",
+  disable: true, // Temporarily disabled to bypass VPS build hang
   register: true,
   skipWaiting: true,
 });
