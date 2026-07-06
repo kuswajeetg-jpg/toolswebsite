@@ -31,7 +31,7 @@ npx prisma db push
 
 echo ""
 echo "--> 4. Building Next.js application..."
-npm run build
+NODE_OPTIONS="--max-old-space-size=512" npm run build
 
 echo ""
 echo "--> 5. Restarting PM2 process..."
