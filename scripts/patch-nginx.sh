@@ -5,6 +5,10 @@ CONFIG_FILE="/etc/nginx/sites-available/toolswebsite"
 
 echo "--> Patching Nginx configuration file..."
 
+# Create the directory under /var/www/html and set permissions
+mkdir -p /var/www/html/.well-known/acme-challenge
+chmod -R 755 /var/www/html/.well-known
+
 # Create a clean configuration for port 80 with acme-challenge path
 cat << 'EOF' > "$CONFIG_FILE"
 server {
@@ -12,9 +16,9 @@ server {
     listen [::]:80 default_server;
     server_name valuehostings.site www.valuehostings.site;
 
-    # Serve Let's Encrypt validation files locally
+    # Serve Let's Encrypt validation files locally from public html
     location /.well-known/acme-challenge/ {
-        root /var/www/toolswebsite/public;
+        root /var/www/html;
     }
 
     # Fallback proxy to Next.js
@@ -38,9 +42,9 @@ server {
     ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
     ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
 
-    # Serve Let's Encrypt validation files locally
+    # Serve Let's Encrypt validation files locally from public html
     location /.well-known/acme-challenge/ {
-        root /var/www/toolswebsite/public;
+        root /var/www/html;
     }
 
     location / {
