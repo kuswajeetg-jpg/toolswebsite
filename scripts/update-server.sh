@@ -29,13 +29,16 @@ echo ""
 echo "--> 3. Updating Database Schema..."
 npx prisma db push
 
+echo "--> 3.5 Stopping PM2 process to free memory..."
+pm2 stop toolswebsite || true
+
 echo ""
 echo "--> 4. Building Next.js application..."
 NODE_OPTIONS="--max-old-space-size=512" npm run build
 
 echo ""
-echo "--> 5. Restarting PM2 process..."
-pm2 restart toolswebsite || pm2 start npm --name "toolswebsite" -- start
+echo "--> 5. Starting PM2 process..."
+pm2 start toolswebsite || pm2 start npm --name "toolswebsite" -- start
 
 echo ""
 echo "=========================================================="
