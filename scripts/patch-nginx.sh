@@ -60,10 +60,13 @@ server {
 }
 EOF
 
+echo "--> Symlinking site configuration to sites-enabled..."
+ln -sf /etc/nginx/sites-available/toolswebsite /etc/nginx/sites-enabled/toolswebsite
+
 echo "--> Testing Nginx configuration..."
 nginx -t
 
 echo "--> Reloading Nginx..."
 systemctl restart nginx
 
-echo "--> Nginx patched successfully!"
+echo "--> Nginx patched and enabled successfully!"
